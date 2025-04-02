@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}My Events{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>My Events</h2>
+  <a href="{% url 'events:add' %}" class="btn btn-success mb-3">Add New Event</a>
+
+  <div id="event-list">
+    {% include 'events/partials/list.html' %}
+  </div>
+</div>
+{% endblock %}

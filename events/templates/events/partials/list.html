@@ -1,0 +1,9 @@
+{% if events %}
+<ul class="list-group">
+  {% for event in events %}
+  <li class="list-group-item">{{ event.title }} - {{ event.date }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No events added yet.</p>
+{% endif %}
