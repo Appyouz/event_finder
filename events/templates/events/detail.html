@@ -9,5 +9,10 @@
   <p><strong>Description:</strong> {{ event.description }}</p>
   <a href="{% url 'events:list' %}" class="btn btn-secondary mt-3">Back to Event List</a>
   <a href="{% url 'events:edit' event.id %}" class="btn btn-primary mt-3">Edit</a>
+
+  <form method="post" action="{% url 'events:delete' event.id %}" class="mt-3">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
 </div>
 {% endblock %}

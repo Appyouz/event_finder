@@ -55,3 +55,21 @@ def edit_event(request: HttpRequest, event_id: int) -> HttpResponse:
         form = AddEventForm(instance=event)  # Populate form with existing event data
 
     return render(request, 'events/edit_event.html', {'form': form, 'event': event})
+
+
+@login_required
+def delete_event(request: HttpRequest, event_id: int) -> HttpResponse:
+    event = get_object_or_404(Events, pk = event_id)
+
+    if event.user != request.user:
+        messages.error(request, "You are not authorized to delete this event.")
+        return redirect('events:detail', event_id=event.id)
+    
+    if request.method == "POST":
+        event.delete()
+        messages.success(request, "Event deleted successfully.")
+        return redirect("events:list")
+    else:
+        messages.error(request, "Invalid request method.")
+        return redirect('events:detail', event_id=event.id)
+
